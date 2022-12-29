@@ -6,14 +6,18 @@ export const getReport = async (req, res) => {
     const { id } = req.params;
     const report = await prisma.report.findUnique({
         where: {
-            id: Number(id),
+            id: parseInt(id),
         },
     });
     res.status(200).json(report);
 };
 
 export const getReports = async (req, res) => {
-    const reports = await prisma.report.findMany();
+    const reports = await prisma.report.findMany({
+        include: {
+            report_img: true,
+        }
+    });
     res.json(reports);
 }
 
@@ -21,6 +25,9 @@ const getUncheckedReports = async (req, res) => {
     const reports = await prisma.report.findMany({
         where: {
             checked: false,
+        },
+        include: {
+            report_img: true,
         }
     });
     res.status(200).json(reports);
@@ -42,7 +49,7 @@ export const checkReport = async (req, res) => {
     const { id } = req.params;
     const report = await prisma.report.update({
         where: {
-            id: Number(id),
+            id: parseInt(id),
         },
         data: {
             checked: true,
