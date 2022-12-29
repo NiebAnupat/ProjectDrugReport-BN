@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model admin {
+  email    String @id @db.VarChar(50)
+  password String @db.VarChar(20)
+  username String @db.VarChar(50)
+}
+
+model report {
+  id         Int          @id @default(autoincrement())
+  title      String       @db.VarChar(100)
+  detail     String       @db.Text
+  location   String       @db.VarChar(255)
+  report_img report_img[]
+}
+
+model report_img {
+  id        Int    @id @default(autoincrement())
+  img       Bytes
+  report_id Int
+  report    report @relation(fields: [report_id], references: [id], onUpdate: Restrict, map: "report_img_ibfk_1")
+
+  @@index([report_id], map: "report_id")
+}
