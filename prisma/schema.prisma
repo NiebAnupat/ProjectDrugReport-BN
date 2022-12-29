@@ -18,6 +18,7 @@ model report {
   title      String       @db.VarChar(100)
   detail     String       @db.Text
   location   String       @db.VarChar(255)
+  checked     Boolean      @default(false)
   report_img report_img[]
 }
 

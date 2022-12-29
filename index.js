@@ -1,19 +1,25 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 dotenv.config();
 const app = express();
 const corsConfig = {
     origin: "http://localhost:3000",
 }
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+global.__basedir = __dirname;
+
 app.use(cors(corsConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-})
+import reportRouter from "./src/router/report.js";
+app.use("/report", reportRouter);
 
 
 app.listen(process.env.PORT, () => {

@@ -1,15 +1,22 @@
 import multer from 'multer';
-import path from 'path';
 
-export default {
-    storage: multer.diskStorage({
-        destination: path.join(__dirname, '..', '..', 'uploads'),
-        filename: (request, file, callback) => {
-            const fileName = `${Date.now()}-${file.originalname}`;
+const imageFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith("image")) {
+        cb(null, true);
+    } else {
+        cb("Please upload only images.", false);
+    }
+};
 
-            callback(null, fileName);
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, __basedir + "/assets/temp/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-image-${file.originalname}`);
+    },
+});
 
-        }
-    })
+let uploadFile = multer({ storage: storage, fileFilter: imageFilter });
 
-}
+export default uploadFile;
