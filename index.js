@@ -1,14 +1,15 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
 const corsConfig = {
-    origin: "http://localhost:3000",
-}
+  origin: "http://localhost:3000",
+  credentials: true,
+};
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 import reportRouter from "./src/router/report.js";
 app.use("/report", reportRouter);
 
-
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
