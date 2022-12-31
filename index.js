@@ -20,7 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 import reportRouter from "./src/router/report.js";
+import authRouter from "./src/router/auth.js";
 app.use("/report", reportRouter);
+app.use("/auth", authRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

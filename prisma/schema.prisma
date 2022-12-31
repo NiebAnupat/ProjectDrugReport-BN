@@ -20,6 +20,7 @@ model report {
   location   String       @db.VarChar(255)
   date       DateTime     @db.Date
   checked    Boolean      @default(false)
+  edit_at    DateTime     @default(now()) @db.Timestamp(0)
   report_img report_img[]
 }
 
