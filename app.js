@@ -17,8 +17,8 @@ const corsConfig = {
   credentials: true,
 };
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 global.__basedir = __dirname;
 
 app.use(cors(corsConfig));
