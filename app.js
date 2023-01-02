@@ -13,7 +13,7 @@ require("dotenv").config();
 
 const app = express();
 const corsConfig = {
-  origin: "https://anupat-dav.com/",
+  origin: "https://anupat-dav.com",
   credentials: true,
 };
 
