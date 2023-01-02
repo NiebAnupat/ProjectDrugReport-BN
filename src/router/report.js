@@ -1,14 +1,25 @@
-import upload from "../middleware/upload.js";
-import express from "express";
+// import upload from "../middleware/upload.js";
+// import express from "express";
+const upload = require("../middleware/upload");
+const express = require("express");
 const router = express.Router();
 
-import {
+// import {
+//   getReports,
+//   getCheckedReports,
+//   getUncheckedReports,
+//   createReport,
+//   checkReport,
+// } from "../controller/report.js";
+
+const {
+  getReport,
   getReports,
   getCheckedReports,
   getUncheckedReports,
   createReport,
   checkReport,
-} from "../controller/report.js";
+} = require("../controller/report");
 
 router.get("/all", getReports);
 
@@ -20,4 +31,5 @@ router.post("/", upload.array("images"), createReport);
 
 router.post("/check/:id", checkReport);
 
-export default router;
+// export default router;
+module.exports = router;
