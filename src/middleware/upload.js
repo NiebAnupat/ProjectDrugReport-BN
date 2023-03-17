@@ -1,5 +1,5 @@
-// import multer from 'multer';
 const multer = require("multer");
+const fs = require("fs");
 
 const imageFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
@@ -11,7 +11,11 @@ const imageFilter = (req, file, cb) => {
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, __basedir + "/assets/temp/");
+    const uploadDir = __basedir + "/assets/temp/";
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-image-${file.originalname}`);
@@ -20,5 +24,4 @@ let storage = multer.diskStorage({
 
 let uploadFile = multer({ storage: storage, fileFilter: imageFilter });
 
-// export default uploadFile;
 module.exports = uploadFile;
