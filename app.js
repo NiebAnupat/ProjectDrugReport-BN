@@ -12,15 +12,14 @@ const { fileURLToPath } = require("url");
 require("dotenv").config();
 
 const app = express();
-// const corsConfig = {
-//   origin: "http://localhost:3000",
-//   credentials: true,
-// };
+const corsConfig = {
+  origin: "https://project-drug-report-fn.vercel.app",
+  credentials: true,
+};
 
 global.__basedir = __dirname;
 
-// app.use(cors(corsConfig));
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
