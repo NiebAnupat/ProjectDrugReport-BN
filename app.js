@@ -13,7 +13,7 @@ require("dotenv").config();
 
 const app = express();
 const corsConfig = {
-  origin: "https://project-drug-report-fn.vercel.app",
+  origin: "project-drug-report-fn.vercel.app",
   credentials: true,
 };
 
