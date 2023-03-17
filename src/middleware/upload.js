@@ -15,6 +15,7 @@ let storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-image-${file.originalname}`);
+    console.log("Uploaded file: " + file.originalname);
   },
 });
 
